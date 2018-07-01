@@ -1,0 +1,47 @@
+mixin demo-principal(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  div(class=spec.__class)&attributes(attributes)
+    h4.h5.text-center Demostración de frontend Principal-login
+    .card.mt-3
+      .card-header.text-dark Pages / Views
+      .card-body
+        ul.list-unstyled
+          li
+            a(href=baseUrl + "styleguide")
+              u Guía de estilos
+          li
+            a(href=baseUrl + "login")
+              u Inicio de sesión
+          li
+            a(href=baseUrl + "onboarding")
+              u Activación
+          li
+            a(href=baseUrl + "validar-cuenta/ayuda")
+              u Activación (old)
+          li
+            a(href=baseUrl + "dashboard")
+              u Dashboard
+          li
+            a(href=baseUrl + "logout")
+              u Cierre de sesión
+    .card.mt-3
+      .card-header.text-dark Acciones
+      .card-body
+        ul.list-unstyled
+          li
+            a(href="#" onclick="return components.login.fvLogin.errorLogin()")
+              u Credenciales incorrectas
+          li
+            a(href="#" onclick="return components.login.fvLogin.errorUserSelectFound()")
+              u Actualizar cuenta
+          li
+            a(href="#" onclick="return components.login.fvLogin.errorUserselectCallcenter()")
+              u Correo en múltiples cuentas
+          li
+            a(href="#" onclick="return components.login.fvLogin.login('https://httpstat.us/429?sleep=1000')")
+              u Límite de peticiones alcanzado (error 429)
+          li
+            a(href="#" onclick="return components.login.fvLogin.login('https://httpstat.us/500?sleep=1000')")
+              u Unhandled error

@@ -1,0 +1,6 @@
+mixin slider-helpful(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  .owl-carousel.owl-theme.slider-helpful.w-100(class=spec.__class)&attributes(attributes)
+    block

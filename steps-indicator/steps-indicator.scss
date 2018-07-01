@@ -1,0 +1,36 @@
+// steps-indicator styles
+.steps-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    height: 20px;
+    white-space: nowrap;
+    transform: translate(-50%, 50%);
+    .line {
+        background-color: #dedede;
+        height: 4px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 100%;
+        z-index: -1;
+    }
+    .step {
+        width: 20px;
+        height: 20px;
+        margin: 0 32px;
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid $success;
+        background: $white;
+        &.done {
+            background: $success;
+        }
+        &:last-child {
+            margin: 0 0 0 32px;
+        }
+        &:first-child {
+            margin: 0 32px 0 0;
+        }
+    }
+}

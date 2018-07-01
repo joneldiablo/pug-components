@@ -1,0 +1,10 @@
+mixin steps-indicator(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+  - spec.steps = spec.steps || ["done","",""]
+
+  .steps-indicator(class=spec.__class)&attributes(attributes)
+    .line
+    .steps
+      each step in spec.steps
+        span.step(class={done:step=="done"})  

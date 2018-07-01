@@ -1,0 +1,39 @@
+include ../icons/icons
+
+mixin modal-general(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.id = spec.id || "general"
+  - spec.idTitle = spec.idTitle || "10"
+  - spec.label = spec.label || false
+  - spec.icon = spec.icon || "principal-info"
+  - spec.close = (typeof(spec.close) == "undefined"? true: spec.close)
+  -
+    var label = "modal" + spec.id + "Label";
+    var attrs = {
+      id: spec.id,
+      class: spec.__class,
+      role: "dialog",
+      "aria-hidden": "true",
+      "aria-labelledby": label,
+      tabindex: "-1",
+      "data-backdrop": (spec.close? "true": "static"),
+      "data-keyboard": spec.close+""
+    }
+
+  .modal-general.modal.fade&attributes(attrs)&attributes(attributes)
+    .modal-dialog.mw-100.w-50(role="document")
+      .modal-content
+        .modal-header
+          h4.font-weight-bold.h4.text-primary.modal-title&attributes(spec.headerAttrs)
+            +icons({icon:spec.icon})
+            if spec.label
+              != spec.label
+            else
+              span
+          if spec.close
+            button.close.text-primary(data-dismiss="modal", type="button", aria-label="Close")
+              +icons({icon:"principal-cross"})
+        .modal-body.px-5
+          .px-2
+            block

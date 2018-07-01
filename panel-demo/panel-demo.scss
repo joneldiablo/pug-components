@@ -1,0 +1,12 @@
+// panel-demo styles
+.panel-demo {
+    .trigger {
+        left: -179px;
+        position: absolute;
+        cursor: pointer;
+    }
+    .panel-content {
+        overflow-y: auto;
+        max-height: calc(100% - 132px);
+    }
+}

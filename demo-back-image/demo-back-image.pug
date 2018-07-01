@@ -1,0 +1,6 @@
+mixin demo-back-image(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  .demo-back-image(class=spec.__class)&attributes(attributes)
+    

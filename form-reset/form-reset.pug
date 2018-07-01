@@ -1,0 +1,35 @@
+include ../form-field/form-field
+
+mixin form-reset(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+  - spec.label = spec.label || ''
+  - spec.labelAttrs = spec.labelAttrs || {}
+  - spec.icon = spec.icon || ''
+  - spec.name = spec.name || ''
+  - spec.type = spec.type || ''
+  - spec.placeholder = spec.placeholder || ''
+  - spec.send = spec.send || 'Enviar'
+
+  .form-reset(class=spec.__class)&attributes(attributes)
+    form(action="")
+      +form-field({
+        type:"input-group-icon",
+        label:spec.label,
+        labelAttrs:spec.labelAttrs,
+        igi:{
+          icon:spec.icon,
+          name:spec.name,
+          attrs:{
+            type:spec.type,
+            required:true,
+            placeholder:spec.placeholder
+          }
+        }
+      })
+      +form-field({
+        type:"submit",
+        attrs:{
+          valude:spec.send
+        }
+      })

@@ -1,0 +1,14 @@
+include ../icons/icons
+
+mixin panel-demo(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  .panel-demo.text-white(class=spec.__class)&attributes(attributes)
+    .trigger.w-170px.bg-info(style="opacity:.5")
+      .controls.text-right.mr-4
+        +icons({icon:"principal-arrow-left", __class:"circle"})
+        span.mr-2.op-7 Demostración
+    .panel-content.h-100.bg-info
+      .p-3
+        block

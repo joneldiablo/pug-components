@@ -1,0 +1,22 @@
+// panel styles
+.panel {
+    position: relative;
+    .trigger {
+        width: 170px;
+        right: 0;
+        position: absolute;
+        .controls {
+            line-height: 76px;
+            cursor: pointer;
+            .op-7 {
+                opacity: .7;
+            }
+            i.circle {
+                border-radius: 100%;
+                border: 2px solid white;
+                text-align: center;
+                font-size: 26px;
+            }
+        }
+    }
+}

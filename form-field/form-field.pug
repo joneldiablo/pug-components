@@ -1,0 +1,35 @@
+include ../input-group-icon/input-group-icon
+
+mixin form-field(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+  - spec.name = spec.name || ''
+  - spec.label = spec.label || false
+  - spec.labelAttrs = spec.labelAttrs || {}
+  - spec.type = spec.type || ''
+  - spec.inputAttrs = spec.inputAttrs || spec.attrs || {}
+  - spec.options = spec.options || {}
+  - spec.validation = spec.validation || false
+
+  .form-group.form-field(class=spec.__class)&attributes(attributes)
+    if spec.label
+      label(for=spec.name)&attributes(spec.labelAttrs)= spec.label
+    case spec.type
+      when "select"
+        select.form-control(name=spec.name id=spec.name type=spec.type)&attributes(spec.inputAttrs)
+          each optionElem, i in spec.options
+            if optionElem.optgroup
+              optgroup(label=optionElem.label)&attributes(optionElem.attrs?optionElem.attrs:{})
+                each optionsGroup, j in optionElem.options
+                  option(value=j=="null"?null:j)&attributes(optionsGroup.attrs?optionsGroup.attrs:{})= optionsGroup.label
+            else
+              option(value=i=="null"?null:i)&attributes(optionElem.attrs?optionElem.attrs:{})= optionElem.label
+      when "textarea"
+        textarea.form-control(name=spec.name, id=spec.name, cols="30", rows="10")&attributes(spec.inputAttrs)
+      when "input-group-icon"
+        - spec.igi.name = spec.igi.name || spec.name
+        +input-group-icon(spec.igi)
+      when "submit"
+        input.btn.btn-primary.btn-block(type=spec.type)&attributes(spec.inputAttrs)
+      default
+        input.form-control(name=spec.name id=spec.name type=spec.type)&attributes(spec.inputAttrs)

@@ -1,0 +1,35 @@
+// input-group-icon styles
+.input-group-icon {
+    &.input-group {
+        border-radius: $input-border-radius;
+        border-bottom: $input-border-width*2 solid $input-border-color;
+        .icon {
+            opacity: .3;
+        }
+        &:focus-within {
+            border-bottom: $input-border-width*2 solid $primary;
+            .form-control:focus {
+                border-bottom-color: $input-border-color;
+            }
+        }
+        &.active {
+            .icon {
+                color: $primary;
+                opacity: 1;
+            }
+        }
+        &.is-valid {
+            border-bottom-color: $form-feedback-valid-color;
+        }
+        &.is-invalid {
+            border-bottom-color: $form-feedback-invalid-color;
+            .icon {
+                color: $danger;
+                opacity: 1;
+                &:before {
+                    content: $principal-cross !important;
+                }
+            }
+        }
+    }
+}

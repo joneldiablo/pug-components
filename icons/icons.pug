@@ -1,0 +1,15 @@
+mixin icons(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  i.icon(class=[spec.__class,spec.icon])&attributes(attributes)
+    case spec.icon
+      when "principal-sheet-money"
+      when "principal-sheet-download"
+      when "principal-sheet-search"
+      when "principal-people"
+      when "principal-people-invert"
+        span.path1
+        span.path2
+      default
+        |  

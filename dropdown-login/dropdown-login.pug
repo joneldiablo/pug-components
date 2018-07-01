@@ -1,0 +1,96 @@
+include ../input-group-icon/input-group-icon
+include ../form-field/form-field
+
+mixin dropdown-login(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.copy = spec.copy || {}
+  - spec.error = spec.error || false
+  - spec.formFields = spec.formFields || formFields
+  - spec.services = spec.services || services
+  -
+    var formFields = {
+      select:{
+        label: "",
+        type: "select",
+        name: spec.formFields.select,
+        inputAttrs: {
+          size: 1
+        },
+        options:{
+          null:{label:spec.copy["id-select"],attrs:{selected:true,disabled:true}},
+          individual:{
+            label:spec.copy["id-individual"], optgroup:true, 
+            options:{
+              fondoAE:{label:spec.copy["id-fondoAE"]},
+              planPersonal:{label:spec.copy["id-planPersonal"]},
+              planPension:{label:spec.copy["id-planPension"]}
+            }
+          },
+          enterprise:{label:spec.copy["id-enterprise"], optgroup:true,
+            options:{
+              fondoInversion:{label:spec.copy["id-fondoInversion"]},
+              adminEFA:{label:spec.copy["id-adminEFA"]},
+              adminPlanPrivado:{label:spec.copy["id-adminPlanPrivado"]}
+            }
+          }
+        }
+      },
+      inputUser: {
+        name: spec.formFields.user,
+        icon: "principal-user",
+        prepend: true,
+        input: {
+          type: "email",
+          placeholder: spec.copy["id-usr"],
+          required: true
+        }
+      },
+      inputPass: {
+        name: spec.formFields.password,
+        icon: "principal-key",
+        prepend: true,
+        input: {
+          type: "password",
+          placeholder: spec.copy["id-pass"],
+          required: true
+        }
+      }
+    }
+    var inputAttrs = {
+      class: {
+        "mb-3": true,
+        "is-invalid": spec.error
+      }
+    }
+
+  a#navbarDropdown.nav-link.dropdown-toggle(data-toggle="dropdown", href="#", role="button", aria-expanded="false", aria-haspopup="true", copy-text="access")= spec.copy["id-access"]
+    span(class="fa fa-angle-down") &nbsp;
+  #dropdownLogin.dropdown-login.dropdown(class=spec.__class)&attributes(attributes)
+    .dropdown-menu.dropdown-menu-right.py-0.border-0(aria-labelledby="navbarDropdown" aria-autoclose="false")
+      .px-5.py-3.bg-light
+        form(method="post" action=spec.services.signin)
+          +form-field(formFields.select)
+          .form-group
+            label.d-none(for="user", copy-text="usr")= spec.copy["id-usr"]
+            +input-group-icon(formFields.inputUser)(class=inputAttrs.class)
+          .form-group
+            label.d-none(for="password", copy-text="pass")= spec.copy["id-pass"]
+            +input-group-icon(formFields.inputPass)(class=inputAttrs.class)
+          span.text-danger(class={'d-none':!spec.error}, copy-text="invalid")= spec.copy["id-invalid"]
+          //- .form-check
+          //-   input#dropdownCheck.form-check-input(type="checkbox")
+          //-   label.form-check-label(for="dropdownCheck")
+          //-     | Recordarme
+          p.text-center.pt-3
+            button.btn.btn-primary.btn-block(type="submit", copy-text="getin", disabled)= spec.copy["id-getin"]
+          p.inline
+            span.mr-5(copy-text="getback")= spec.copy["id-getback"]
+            a.font-weight-bold(href=spec.services.getPass)
+              u(copy-text="pass")= spec.copy["id-pass"]
+            span.mx-2  o 
+            a.font-weight-bold(href=spec.services.getUsr)
+              u(copy-text="usr")= spec.copy["id-usr"]
+      .bg-success.px-5.py-3
+        p.mb-0.text-center
+          a.btn.btn-outline-secondary.btn-block(href=spec.services.signup, copy-text="signup")= spec.copy["id-signup"]

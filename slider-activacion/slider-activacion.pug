@@ -1,0 +1,42 @@
+mixin slider-activacion(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+
+  .owl-carousel.owl-theme.slider-activacion(class=spec.__class)&attributes(attributes)
+    .item
+      p.text-white.mt-4(copy-text="activar-facil")= site.data.copy["id-activar-facil"]
+      .bg-light.p-4
+        .row
+          .col-3
+            figure
+              img(src=baseUrl + "assets/images/nss.svg", alt="NSS").svg
+          .col-9
+            h5.h5.font-weight-bold(copy-text="tu-nss")= site.data.copy["id-tu-nss"]
+            p.mb-0(copy-text="tu-nss-descripcion")= site.data.copy["id-tu-nss-descripcion"]
+        .row
+          .offset-3.col-9
+            p.mb-4 o
+        .row
+          .col-3
+            figure.px-3
+              img(src=baseUrl + "assets/images/contrato.svg", alt="Contrato").svg
+          .col-9
+            h5.h5.font-weight-bold(copy-text="tu-contrato")= site.data.copy["id-tu-contrato"]
+            p(copy-text="tu-contrato-descripcion")= site.data.copy["id-tu-contrato-descripcion"]
+    .item
+      p.text-white.mt-4(copy-text="beneficios")= site.data.copy["id-beneficios"]
+      .bg-light.p-4
+        ul.check-list
+          each beneficio in [1,2,3,4,5]
+            li
+              p.text-muted.mb-0.mt-2(copy-text="beneficio-"+beneficio)= site.data.copy["id-beneficio-"+beneficio]
+    .item
+      p.text-white.mt-4(copy-text="obten-nip")= site.data.copy["id-obten-nip"]
+      .bg-light.p-4
+        .row
+          .col-3
+            figure
+              img(src=baseUrl + "assets/images/call-center.svg", alt="Centro de atención telefónica").svg
+          .col-9
+            h5.h5.font-weight-bold(copy-text="llama")= site.data.copy["id-llama"]
+            p(copy-text="llama-descripcion")= site.data.copy["id-llama-descripcion"]

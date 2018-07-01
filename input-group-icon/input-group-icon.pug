@@ -1,0 +1,33 @@
+include ../icons/icons
+
+mixin input-group-icon(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ''
+  - spec.icon = spec.icon || ''
+  - spec.name = spec.name || 'input'
+  - spec.prepend = typeof spec.prepend !== "undefined"? spec.prepend : true
+  - spec.attrs = spec.attrs || spec.input || null
+  -
+    var input = {
+      "name": spec.name,
+      "id": spec.name,
+      "type": "text",
+      "class": {
+        "border-left-0": spec.prepend,
+        "border-right-0": spec.append,
+        "pl-0": spec.prepend,
+        "pr-0": spec.append
+      }
+    }
+    input = Object.assign({},input, spec.attrs)
+
+  .input-group-icon.input-group(class=spec.__class)&attributes(attributes)
+    if(spec.prepend)
+      .input-group-prepend
+        .input-group-text.bg-white.border-right-0.px-2
+          +icons({icon:spec.icon})
+    input.form-control&attributes(input)
+    if(spec.append)
+      .input-group-append
+        .input-group-text.bg-white.border-right-0.px-2
+          +icons({icon:(spec.iconAppend||spec.icon)})

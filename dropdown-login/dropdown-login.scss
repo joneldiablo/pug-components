@@ -1,0 +1,37 @@
+// dropdown-login styles
+.dropdown-login {
+    .dropdown-menu {
+        box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.12) !important;
+        min-width: 300px !important;
+        .input-group-text {
+            max-height: 40px;
+        }
+        input.form-control {
+            height: 40px;
+        }
+        button.btn {
+            height: 35px;
+        }
+        select {
+            min-height: 35px;
+        }
+        p.inline a {
+            display: inline !important;
+            u {
+                color: $primary;
+            }
+        }
+    }
+    .form-control {
+        &:focus {
+            border-color: $input-border-color;
+            border-bottom-color: $primary;
+        }
+    }
+    optgroup {
+        color: $primary;
+        option {
+            color: $gray-900;
+        }
+    }
+}
