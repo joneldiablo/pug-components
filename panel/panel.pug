@@ -4,6 +4,7 @@ mixin panel(spec)
   - spec = spec || {}
   - spec.__class = spec.__class || ""
   - spec.trigger = typeof spec.trigger !== "undefined"? spec.trigger : true
+  - spec.wrapper = typeof spec.wrapper !== "undefined"? spec.wrapper : true
   - spec.triggerIcon = spec.triggerIcon || ""
   - spec.triggerAttrs = spec.triggerAttrs || {}
 
@@ -14,6 +15,8 @@ mixin panel(spec)
           span.mr-2.op-7 Ocultar
           +icons({icon:spec.triggerIcon, __class:"circle"})
     .panel-content
-      .p-5
-        .mx-2.px-4.py-2
-          block
+      if spec.wrapper
+        .p-5
+          .mx-2.px-4.py-2
+            block
+      block
