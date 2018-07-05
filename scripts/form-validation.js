@@ -17,12 +17,14 @@ export default class FormValidation extends ServiceHandler {
       //https://httpstat.us/500 etc
     }, settings);
     super($, queryElement, settings);
+    this.$ = $;
     let vf = this;
     vf.settings = settings;
     vf.$domElement = $(queryElement);
     vf.validation(settings);
   }
-  validation(settings) {
+  validation() {
+    let $ = this.$;
     let fv = this;
     let $domElement = fv.$domElement.find('form').length ? fv.$domElement.find('form') : fv.$domElement;
     fv.valid = $domElement.validate($.extend({
