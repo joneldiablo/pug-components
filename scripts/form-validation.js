@@ -23,7 +23,7 @@ export default class FormValidation extends ServiceHandler {
     vf.$domElement = $(queryElement);
     vf.validation(settings);
   }
-  validation() {
+  validation(settings) {
     let $ = this.$;
     let fv = this;
     let $domElement = fv.$domElement.find('form').length ? fv.$domElement.find('form') : fv.$domElement;
