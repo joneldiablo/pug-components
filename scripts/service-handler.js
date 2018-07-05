@@ -6,11 +6,7 @@ export default class ServiceHandler {
       submit: true,
       todo: null,//callback form before submit: string || function
       todoUrl: null,//id of url
-      urls: {},
-      //url: 'http://principal-login.requestcatcher.com/'
-      //status code http
-      //https://httpstat.us/429
-      //https://httpstat.us/500 etc
+      urls: {}
     }, settings);
     let sh = this;
     sh.settings = settings;
