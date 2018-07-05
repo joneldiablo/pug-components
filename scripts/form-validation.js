@@ -17,12 +17,14 @@ export default class FormValidation extends ServiceHandler {
       //https://httpstat.us/500 etc
     }, settings);
     super($, queryElement, settings);
+    this.$ = $;
     let vf = this;
     vf.settings = settings;
     vf.$domElement = $(queryElement);
     vf.validation();
   }
   validation() {
+    let $ = this.$;
     let fv = this;
     let $domElement = fv.$domElement.find('form').length ? fv.$domElement.find('form') : fv.$domElement;
     fv.valid = $domElement.validate({
@@ -55,6 +57,7 @@ export default class FormValidation extends ServiceHandler {
     });
   }
   userUpdate(url, data) {
+    let $ = this.$;
     let fv = this;
     //url += '/' + fv.$domElement[0].email.value;
     let token = fv.getToken();
