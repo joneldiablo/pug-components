@@ -10,11 +10,7 @@ export default class FormValidation extends ServiceHandler {
     settings = $.extend({
       urls: {},
       rules: {},
-      messages: {},
-      //url: 'http://principal-login.requestcatcher.com/'
-      //status code http
-      //https://httpstat.us/429
-      //https://httpstat.us/500 etc
+      messages: {}
     }, settings);
     super($, queryElement, settings);
     this.$ = $;
