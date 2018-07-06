@@ -63,7 +63,8 @@ export default class ServiceHandler {
     $('#errorCatcher').find('.modal-title span').text(title || 'Error');
     $('#errorCatcher').find('.modal-body .message').html(body || '<p>Código de error: ' + status + '</p>');
     if (jsonResp) {
-      $('#errorCatcher').find('.modal-body .message').append($('<p></p>').jJsonViewer(jsonResp, { expanded: true }));
+      let e = typeof jsonResp == 'string' ? jsonResp : $('<p></p>').jJsonViewer(jsonResp, { expanded: true });
+      $('#errorCatcher').find('.modal-body .message').append(e);
     }
     setTimeout(() => {
       $('#errorCatcher').modal('show');
