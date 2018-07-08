@@ -11,4 +11,32 @@ mixin panel-demo(spec)
         span.mr-2.op-7 Demostración
     .panel-content.h-100.bg-info
       .p-3
+        .card.mt-3
+          .card-header.text-dark Pages / Views
+          .card-body
+            -
+              const PATH = require('path');
+              const dirTree = require('directory-tree');
+              let output = [];
+              
+              const tree = dirTree('./src/');
+              buble([tree]);
+              function buble(children){
+                for(let i in children){
+                  let page = children[i].path.replace(/\\/g,'/').replace(/^(\.\/)?src/,'').replace(/^\//,'').replace('pug','html');
+                  let urlPathArr = page.split(/\/|\\/);
+                  urlPathArr.pop();
+                  if(children[i].extension == ".pug"){
+                    output.push({path:urlPathArr.join('/'), name:urlPathArr.pop()});
+                  }
+                  if(children[i].children && children[i].name !== 'assets' && children[i].name.search(/^\_/) !== 0){
+                    buble(children[i].children);
+                  }
+                }
+              }
+            ul.list-unstyled
+              each file in output
+                li
+                  a(href=baseUrl + file.path, title=file.name)
+                    u= file.name
         block
