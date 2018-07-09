@@ -1,0 +1,10 @@
+mixin script-template(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.id = spec.id || "script-template"
+  - spec.title = spec.title || ""
+
+  script.script-template(id=spec.id class=spec.__class type="text/template")&attributes(attributes)
+    .title!= spec.title
+    .message
+      block

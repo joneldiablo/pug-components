@@ -14,10 +14,6 @@ export default class PasswordForce extends FormValidation {
     this.patchVaidate();
     this.setEvents();
   }
-  checkRule(regex, value, element) {
-    let check = !!value && regex.test(value);
-    return check;
-  }
   patchVaidate() {
     this.$.validator.prototype.ruleValidationStatus = function (element) {
       element = $(element)[0];
@@ -75,13 +71,13 @@ export default class PasswordForce extends FormValidation {
       }
     });
     $.validator.methods.oneuppercase = function (value, element) {
-      return this.optional(element) || that.checkRule(/(?=.*[a-z])(?=.*[A-Z])/, value, $('.uppercase'));
+      return this.optional(element) || that.checkRule(/(?=.*[a-z])(?=.*[A-Z])/, value);
     };
     $.validator.methods.onenumber = function (value, element) {
-      return this.optional(element) || that.checkRule(/(?=.*\d)/, value, $('.number'));
+      return this.optional(element) || that.checkRule(/(?=.*\d)/, value);
     };
     $.validator.methods.onespecial = function (value, element) {
-      return this.optional(element) || that.checkRule(/(?=.*[\.\-_$@$!%*?&])/, value, $('.special'));
+      return this.optional(element) || that.checkRule(/(?=.*[\.\-_$@$!%*?&])/, value);
     };
   }
 }
