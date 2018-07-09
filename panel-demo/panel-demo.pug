@@ -3,6 +3,7 @@ include ../icons/icons
 mixin panel-demo(spec)
   - spec = spec || {}
   - spec.__class = spec.__class || ''
+  - spec.title = spec.title || 'Demostración de componentes'
 
   .panel-demo.text-white(class=spec.__class)&attributes(attributes)
     .trigger.w-170px.bg-info(style="opacity:.5")
@@ -11,6 +12,7 @@ mixin panel-demo(spec)
         span.mr-2.op-7 Demostración
     .panel-content.h-100.bg-info
       .p-3
+        h4.h5.text-center= spec.title
         .card.mt-3
           .card-header.text-dark Pages / Views
           .card-body

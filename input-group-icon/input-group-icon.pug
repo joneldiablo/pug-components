@@ -24,10 +24,10 @@ mixin input-group-icon(spec)
   .input-group-icon.input-group(class=spec.__class)&attributes(attributes)
     if(spec.prepend)
       .input-group-prepend
-        .input-group-text.bg-white.border-right-0.px-2
+        .input-group-text.border-right-0.px-2
           +icons({icon:spec.icon})
     input.form-control&attributes(input)
     if(spec.append)
       .input-group-append
-        .input-group-text.bg-white.border-right-0.px-2
+        .input-group-text.border-right-0.px-2
           +icons({icon:(spec.iconAppend||spec.icon)})
