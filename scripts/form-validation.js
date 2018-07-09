@@ -19,6 +19,10 @@ export default class FormValidation extends ServiceHandler {
     vf.$domElement = $(queryElement);
     vf.validation(settings);
   }
+  checkRule(regex, value) {
+    let check = !!value && regex.test(value);
+    return check;
+  }
   validation(settings) {
     let $ = this.$;
     let fv = this;
@@ -49,5 +53,8 @@ export default class FormValidation extends ServiceHandler {
         $domElement.find('[type=submit]').prop('disabled', !$domElement.valid());
       }, 300);
     });
+    $.validator.methods.tel = function (value, element) {
+      return this.optional(element) || fv.checkRule(/\d{8,10}/, value);
+    };
   }
 }
