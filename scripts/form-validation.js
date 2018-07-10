@@ -54,7 +54,7 @@ export default class FormValidation extends ServiceHandler {
       }, 300);
     });
     $.validator.methods.tel = function (value, element) {
-      return this.optional(element) || fv.checkRule(/\d{8,10}/, value);
+      return this.optional(element) || fv.checkRule(/^\d{8,10}$/, value);
     };
   }
 }
