@@ -29,11 +29,11 @@ export default class ServiceHandler {
     if (e.preventDefault && e.stopPropagation) {
       e.preventDefault();
       e.stopPropagation();
-      data = $(e.target).serializeArray();
+      data = sh.serializeObject({}, $(e.target).serializeArray());
     } else {
       data = e.data;
     }
-    data = data.concat(sh.extraData);
+    data = sh.extend({}, data, sh.extraData);
     if (typeof sh.settings.todo === 'function') {
       sh.settings.todo(sh, data);
     } else if (typeof sh.settings.todo === 'string') {
@@ -44,11 +44,11 @@ export default class ServiceHandler {
     let sh = this;
     let request = $.ajax({
       url: url,
+      headers: headers,
       data: data,
       method: 'POST',
       dataType: 'json',
       crossDomain: true,
-      headers: headers,
       beforeSend: () => {
         sh.loading();
       },
@@ -112,5 +112,37 @@ export default class ServiceHandler {
   }
   setExtraData(data) {
     this.extraData = data;
+  }
+  appendExtraData(data) {
+    this.extend(this.extraData, data);
+  }
+  serializeObject(serialize) {
+    var o = {};
+    for (const i in serialize) {
+      if (serialize.hasOwnProperty(i)) {
+        const element = serialize[i];
+        if (o[element.name]) {
+          if (!o[element.name].push) {
+            o[element.name] = [o[element.name]];
+          }
+          o[element.name].push(element.value || '');
+        } else {
+          o[element.name] = element.value || '';
+        }
+      }
+    }
+    return o;
+  }
+  extend(target) {
+    var sources = [].slice.call(arguments, 1);
+    for (const id in sources) {
+      if (sources.hasOwnProperty(id)) {
+        const source = sources[id];
+        for (var prop in source) {
+          target[prop] = source[prop];
+        }
+      }
+    }
+    return target;
   }
 }
