@@ -4,10 +4,11 @@ export default class ServiceHandler {
   constructor($, queryElement, settings) {
     settings = $.extend({
       submit: true,
-      todo: null,//callback form before submit: string || function
-      todoUrl: null,//id of url
+      todo: null, //callback form before submit: string || function
+      todoUrl: null, //id of url
       urls: {}
     }, settings);
+    this.$ = $;
     let sh = this;
     sh.settings = settings;
     let $domElement = sh.$domElement = $(queryElement);
@@ -26,6 +27,7 @@ export default class ServiceHandler {
   submit(e) {
     let data;
     let sh = this;
+    let $ = this.$;
     if (e.preventDefault && e.stopPropagation) {
       e.preventDefault();
       e.stopPropagation();
@@ -42,6 +44,7 @@ export default class ServiceHandler {
   }
   ajax(url, data, headers) {
     let sh = this;
+    let $ = this.$;
     let request = $.ajax({
       url: url,
       headers: headers,
@@ -59,11 +62,14 @@ export default class ServiceHandler {
     return request;
   }
   modal(status, title, body, jsonResp) {
+    let $ = this.$;
     $('.modal').modal('hide');
     $('#errorCatcher').find('.modal-title span').text(title || 'Error');
     $('#errorCatcher').find('.modal-body .message').html(body || '<p>Código de error: ' + status + '</p>');
     if (jsonResp) {
-      let e = typeof jsonResp == 'string' ? jsonResp : $('<p></p>').jJsonViewer(jsonResp, { expanded: true });
+      let e = typeof jsonResp == 'string' ? jsonResp : $('<p></p>').jJsonViewer(jsonResp, {
+        expanded: true
+      });
       $('#errorCatcher').find('.modal-body .message').append(e);
     }
     setTimeout(() => {
@@ -71,6 +77,7 @@ export default class ServiceHandler {
     }, 600);
   }
   modalTemplate(queryElement, status) {
+    let $ = this.$;
     let sh = this;
     let $template = $($(queryElement).html());
     sh.modal(status, $template.filter('.title').html(), $template.filter('.message').html());
@@ -102,10 +109,10 @@ export default class ServiceHandler {
     }
   }
   loading(queryElement) {
-    $(queryElement || this.$domElement).loading();
+    this.$(queryElement || this.$domElement).loading();
   }
   loadingStop(queryElement) {
-    $(queryElement || this.$domElement).loading('stop');
+    this.$(queryElement || this.$domElement).loading('stop');
   }
   getExtraData() {
     return this.extraData;

@@ -14,6 +14,7 @@ export default class Table {
       urls: {}
     }, settings);
     this.name = 'table';
+    this.$ = $;
     let table = this;
     table.queryElement = queryElement;
     table.$element = $(queryElement);
@@ -26,6 +27,7 @@ export default class Table {
     }
   }
   fillTable(data) {
+    let $ = this.$;
     let table = this;
     table.data = data || table.data;
     let $template = $(table.$element.find('script[type="text/template"]').html());
@@ -46,7 +48,7 @@ export default class Table {
             }
             if (col == 'agreement') {
               $cell.on('click', function (e) {
-                table.action();
+                table.action(i, col);
               });
             }
           }
@@ -70,6 +72,7 @@ export default class Table {
     });
   }
   services() {
+    let $ = this.$;
     let table = this;
     table.sh = new ServiceHandler($, table.queryElement, table.settings);
     table.$element.on('submit', 'form', function (e) {
@@ -82,23 +85,31 @@ export default class Table {
         if (table.settings.aliases[key]) {
           name = table.settings.aliases[key];
         }
-        dataSerialized.push({ name: name, value: table.data[$td.data('row')][key] });
+        dataSerialized.push({
+          name: name,
+          value: table.data[$td.data('row')][key]
+        });
       }
       table.sh.setExtraData(dataSerialized);
     });
   }
   getData(url) {
+    let $ = this.$;
+
     $.ajax({
 
     });
   }
   setData(url, data) {
+    let $ = this.$;
 
   }
   getDataByRow(id) {
+    let $ = this.$;
 
   }
   edit($cell) {
+    let $ = this.$;
     let $input = $cell.find('input');
     if ($input.prop('disabled')) {
       $input.prop('disabled', false).focus().removeClass('border-0');
@@ -107,6 +118,7 @@ export default class Table {
     }
   }
   editClose($cell) {
+    let $ = this.$;
     let $input = $cell.find('input');
     if (!$input.prop('disabled')) {
       $input.prop('disabled', true).addClass('border-0');
@@ -120,7 +132,7 @@ export default class Table {
   editCancel($cell) {
     $cell.find('input').val(this.data[$cell.data('row')][$cell.data('column')]);
   }
-  action() {
-    this.settings.actionClick(this);
+  action(i, col) {
+    this.settings.actionClick(this, i, col);
   }
 }

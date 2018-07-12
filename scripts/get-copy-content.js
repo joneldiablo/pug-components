@@ -1,7 +1,7 @@
 'use strict';
 
 export default class Copy {
-  constructor() {
+  constructor($) {
     this.name = 'copy';
     let url = 'http://principal-login.multiplicamx.com/backend/google-ss.php';
 
