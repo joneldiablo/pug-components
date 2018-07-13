@@ -16,7 +16,7 @@ mixin form-field(spec)
       label(for=spec.name)&attributes(spec.labelAttrs)= spec.label
     case spec.type
       when "select"
-        select.form-control(name=spec.name id=spec.name type=spec.type)&attributes(spec.inputAttrs)
+        select.form-control(id=spec.name name=spec.name type=spec.type)
           each optionElem, i in spec.options
             if optionElem.optgroup
               optgroup(label=optionElem.label)&attributes(optionElem.attrs?optionElem.attrs:{})
@@ -25,11 +25,18 @@ mixin form-field(spec)
             else
               option(value=i=="null"?null:i)&attributes(optionElem.attrs?optionElem.attrs:{})= optionElem.label
       when "textarea"
-        textarea.form-control(name=spec.name, id=spec.name, cols="30", rows="10")&attributes(spec.inputAttrs)
+        textarea.form-control(id=spec.name, name=spec.name, cols="30", rows="10")
       when "input-group-icon"
         - spec.igi.name = spec.igi.name || spec.name
         +input-group-icon(spec.igi)
+      when "icon-submit"
+        - spec.iconCustom = true
+        - spec.append = true
+        - spec.prepend = false
+        +input-group-icon(spec)
+          button.p-0.btn.btn-link(type="submit" disabled)
+            +icons({icon:spec.icon})&attributes(spec.iconAttrs)
       when "submit"
         input.btn.btn-primary.btn-block(type=spec.type)&attributes(spec.inputAttrs)
       default
-        input.form-control(name=spec.name id=spec.name type=spec.type)&attributes(spec.inputAttrs)
+        input.form-control(id=spec.name name=spec.name type=spec.type)

@@ -1,16 +1,10 @@
 'use strict';
 
-const InputGroupIcon = require('../input-group-icon/input-group-icon');
+import InputGroupIcon from '../input-group-icon/input-group-icon';
 
-export default class FormField {
+export default class FormField extends InputGroupIcon{
   constructor($, domElement, settings) {
+    super($, domElement + '>.input-group-icon', settings);
     this.name = 'form-field';
-    this.inputGroupIcon = new InputGroupIcon($, $(domElement).find('.input-group-icon'), settings);
-  }
-  setInvalidIGI() {
-    this.inputGroupIcon.setInvalid();
-  }
-  resetIGI() {
-    this.inputGroupIcon.reset();
   }
 }
