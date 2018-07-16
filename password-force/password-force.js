@@ -15,7 +15,8 @@ export default class PasswordForce extends FormValidation {
     this.setEvents();
   }
   patchVaidate() {
-    this.$.validator.prototype.ruleValidationStatus = function (element) {
+    let $ = this.$;
+    $.validator.prototype.ruleValidationStatus = function (element) {
       element = $(element)[0];
       var rules = $(element).rules();
       var errors = {};

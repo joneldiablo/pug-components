@@ -12,8 +12,8 @@ mixin form-field(spec)
   - spec.validation = spec.validation || false
 
   .form-group.form-field(class=spec.__class)&attributes(attributes)
-    if spec.label
-      label(for=spec.name)&attributes(spec.labelAttrs)= spec.label
+    if spec.label && spec.type !== "checkbox"
+      label(for=spec.name)&attributes(spec.labelAttrs)!= spec.label
     case spec.type
       when "select"
         select.form-control(id=spec.name name=spec.name type=spec.type)&attributes(spec.inputAttrs)
@@ -38,5 +38,25 @@ mixin form-field(spec)
             +icons({icon:spec.icon})&attributes(spec.iconAttrs)
       when "submit"
         input.btn.btn-primary.btn-block(type=spec.type)&attributes(spec.inputAttrs)
+      when "checkbox"
+        if typeof spec.label !== 'object'
+          .custom-control.custom-checkbox
+            input.custom-control-input(id=spec.name name=spec.name type='checkbox')&attributes(spec.inputAttrs)
+            label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= spec.label
+        else
+          each label,i in spec.label
+            .custom-control.custom-checkbox
+              input.custom-control-input(id=spec.name name=spec.name type='checkbox')&attributes(spec.inputAttrs[i])
+              label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= label
+      when "radio"
+        if typeof spec.label !== 'object'
+          .custom-control.custom-radio
+            input.custom-control-input(type='radio', id=spec.name name=spec.name)&attributes(spec.inputAttrs)
+            label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= spec.label
+        else
+          each label,i in spec.label
+            .custom-control.custom-radio
+              input.custom-control-input(type='radio', id=spec.name name=spec.name)&attributes(spec.inputAttrs[i])
+              label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= label
       default
         input.form-control(id=spec.name name=spec.name type=spec.type)&attributes(spec.inputAttrs)
