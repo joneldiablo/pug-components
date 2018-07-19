@@ -1,25 +1,33 @@
 mixin icons(spec)
   - spec = spec || {}
   - spec.__class = spec.__class || ''
+  - spec.icon = spec.icon || ''
+  - spec.image = typeof spec.image !== 'undefined'? spec.image: false
+  - spec.alt = spec.alt || ''
 
-  i.icon(class=[spec.__class,spec.icon])&attributes(attributes)
-    case spec.icon
-      when "principal-sheet-money"
-      when "principal-sheet-download"
-      when "principal-sheet-search"
-      when "principal-people"
-      when "principal-mail-chain"
-      when "principal-people-invert"
-        span.path1
-        span.path2
-      when "principal-dollar-cicle"
-      when "principal-email-ok"
-        span.path1
-        span.path2
-        span.path3
-      when "circle-white"
-        span.rounded-circle.bg-white.border.border-dark  
-      when "principal-phone-number"
-        img(src=baseUrl + "assets/images/cellphone.svg", alt="")
-      default
-        |  
+  if !spec.image
+    i.icon(class=[spec.__class,spec.icon])&attributes(attributes)
+      case spec.icon
+        when "principal-sheet-money"
+        when "principal-sheet-download"
+        when "principal-sheet-search"
+        when "principal-people"
+        when "principal-mail-chain"
+        when "principal-people-invert"
+          span.path1
+          span.path2
+        when "principal-dollar-cicle"
+        when "principal-email-ok"
+        when "principal-nss"
+        when "principal-contrato"
+          span.path1
+          span.path2
+          span.path3
+        when "circle-white"
+          span.rounded-circle.bg-white.border.border-dark  
+        when "principal-phone-number"
+          img(src=baseUrl + "assets/images/cellphone.svg", alt="")
+        default
+          |  
+  else
+    img.img-fluid.mx-auto.d-block(src=baseUrl + "assets/images/icons/" + spec.icon + ".svg", alt=spec.alt)

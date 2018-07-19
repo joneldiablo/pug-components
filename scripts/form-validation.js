@@ -57,4 +57,7 @@ export default class FormValidation extends ServiceHandler {
       return this.optional(element) || fv.checkRule(/^\d{8,10}$/, value);
     };
   }
+  validationShowErrors(messages) {
+    this.valid.showErrors(messages);
+  }
 }

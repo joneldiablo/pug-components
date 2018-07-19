@@ -8,4 +8,10 @@
         margin: 0 10px;
         display: inline-block;
     }
+    &.circle {
+        border-radius: 100%;
+        border: 2px solid white;
+        text-align: center;
+        font-size: 26px;
+    }
 }

@@ -31,7 +31,7 @@ export default class ServiceHandler {
     if (e.preventDefault && e.stopPropagation) {
       e.preventDefault();
       e.stopPropagation();
-      data = sh.serializeObject({}, $(e.target).serializeArray());
+      data = $(e.target).serializeObject();
     } else {
       data = e.data;
     }
@@ -64,23 +64,26 @@ export default class ServiceHandler {
   modal(status, title, body, jsonResp) {
     let $ = this.$;
     $('.modal').modal('hide');
-    $('#errorCatcher').find('.modal-title span').text(title || 'Error');
-    $('#errorCatcher').find('.modal-body .message').html(body || '<p>Código de error: ' + status + '</p>');
+    let $modal=$('#modalGeneral');
+    $modal.find('.modal-title span').text(title || 'Error');
+    $modal.find('.modal-body .message').html(body || '<p>Código de error: ' + status + '</p>');
     if (jsonResp) {
       let e = typeof jsonResp == 'string' ? jsonResp : $('<p></p>').jJsonViewer(jsonResp, {
         expanded: true
       });
-      $('#errorCatcher').find('.modal-body .message').append(e);
+      $modal.find('.modal-body .message').append(e);
     }
     setTimeout(() => {
-      $('#errorCatcher').modal('show');
+      $modal.modal('show');
     }, 600);
   }
   modalTemplate(queryElement, status) {
     let $ = this.$;
     let sh = this;
     let $template = $($(queryElement).html());
-    sh.modal(status, $template.filter('.title').html(), $template.filter('.message').html());
+    let $title = $template.filter('.title');
+    let $message = $template.filter('.message');
+    sh.modal(status, $title.html(), $message.html());
   }
   errorProcess(status, textStatus, errorData) {
     let sh = this;

@@ -7,40 +7,44 @@ mixin table(spec)
   - spec.headers = spec.headers || {}
   - spec.headersAttrs = spec.headersAttrs || {}
 
-  h2.h4&attributes(spec.labelAttrs)= spec.label
-  table.table.table-hover(class=spec.__class)&attributes(attributes)
-    colgroup
-      each column in spec.headers
-        col(width=column.col)
-    thead
-      tr&attributes(spec.headersAttrs)
-        each column,i in spec.headers
-          th(class="h-"+i scope="col")!= column.label
-    tbody
-    script(type="text/template")
-      tr
-        each row,i in spec.headers
-          if row.first
-            th(scope="row")
-              if row.default
-                != row.default
+  h2.h4.font-weight-bold&attributes(spec.labelAttrs)= spec.label
+  .table-responsive
+    table.table.table-hover(class=spec.__class)&attributes(attributes)
+      colgroup
+        each column in spec.headers
+          col(width=column.col)
+      thead
+        tr&attributes(spec.headersAttrs)
+          each column,i in spec.headers
+            th(class="h-"+i scope="col")!= column.label
+      tbody
+      if !block
+        script(type="text/template")
+          tr
+            each row,i in spec.headers
+              if row.first
+                th(scope="row")
+                  if row.default
+                    != row.default
+                  else
+                    | {{#{i}}}
               else
-                | {{#{i}}}
-          else
-            td(class=[i,{'editable':row.editable}])
-              if !row.editable
-                span {{#{i}}}
-              else
-                form.form-inline(action="#")
-                  +form-field({
-                    type:"text",
-                    name:i,
-                    attrs: {
-                      class:"border-0 bg-white",
-                      disabled: true
-                    }
-                  })(class="mb-0")
-                  button.btn.btn-link(type="submit" style="display:none")
-                    +icons({icon:"principal-check"})
-                  button.btn.btn-link(type="button")
-                    +icons({icon:"principal-edit"})
+                td(class=[i,{'editable':row.editable}])
+                  if !row.editable
+                    span {{#{i}}}
+                  else
+                    form.form-inline(action="#")
+                      +form-field({
+                        type:"text",
+                        name:i,
+                        attrs: {
+                          class:"border-0 bg-white",
+                          disabled: true
+                        }
+                      })(class="mb-0")
+                      button.btn.btn-link(type="submit" style="display:none")
+                        +icons({icon:"principal-check"})
+                      button.btn.btn-link(type="button")
+                        +icons({icon:"principal-edit"})
+      else
+        block

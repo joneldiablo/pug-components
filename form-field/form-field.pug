@@ -37,7 +37,7 @@ mixin form-field(spec)
           button.p-0.btn.btn-link(type="submit" disabled)
             +icons({icon:spec.icon})&attributes(spec.iconAttrs)
       when "submit"
-        input.btn.btn-primary.btn-block(type=spec.type)&attributes(spec.inputAttrs)
+        input.btn.btn-primary.btn-block(type=spec.type name=spec.name)&attributes(spec.inputAttrs)
       when "checkbox"
         if typeof spec.label !== 'object'
           .custom-control.custom-checkbox

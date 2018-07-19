@@ -4,7 +4,8 @@ export default class SliderHelpful {
   constructor($, queryElement, settings) {
     this.name = 'slider-helpful';
     let $element = this.$element = $(queryElement);
-    let $owl = $element.owlCarousel({
+    let that = this;
+    $element.owlCarousel({
       autoplay: true,
       autoplayHoverPause: true,
       autoplayTimeout: 6000,
@@ -12,8 +13,15 @@ export default class SliderHelpful {
       loop: true,
       margin: 20
     });
+    that.resize();
+    $(window).resize(function () {
+      that.resize();
+    });
+  }
+  resize() {
+    let that = this;
     setTimeout(() => {
-      $owl.trigger('refresh.owl.carousel');
-    }, 1000);
+      that.$element.trigger('refresh.owl.carousel');
+    }, 801);
   }
 }
