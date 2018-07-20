@@ -64,7 +64,7 @@ export default class ServiceHandler {
   modal(status, title, body, jsonResp) {
     let $ = this.$;
     $('.modal').modal('hide');
-    let $modal=$('#modalGeneral');
+    let $modal = $('#modalGeneral');
     $modal.find('.modal-title span').text(title || 'Error');
     $modal.find('.modal-body .message').html(body || '<p>Código de error: ' + status + '</p>');
     if (jsonResp) {
