@@ -43,7 +43,8 @@ export default class PasswordForce extends FormValidation {
       that.$element.find('*').removeClass('bg-danger bg-warning bg-info bg-success');
       let countOk = 0;
       let total = 0;
-      let rules = validator.ruleValidationStatus($('#password'));
+      //TODO: deshardcodear!!!!!
+      let rules = validator.ruleValidationStatus($('#password,#clave'));
       let equalTo = validator.ruleValidationStatus($('#password2'));
       $.extend(rules, equalTo);
       $.each(rules, function (i, val) {
