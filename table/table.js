@@ -32,20 +32,21 @@ export default class Table {
     table.data = data || table.data;
     let $template = $(table.$element.find('script[type="text/template"]').html());
     table.$element.find('tbody').empty();
-    if (data.length) {
-      data.forEach((row, i) => {
+    if (table.data.length) {
+      table.data.forEach((row, i) => {
         let $r = $template.clone();
         for (const col in row) {
           if (row.hasOwnProperty(col)) {
             const content = row[col];
             let $cell = $r.find('td.' + col);
             $cell.data('column', col);
+            $cell.data('row', i);
             if (!$cell.is('.editable')) {
-              $cell.find('span:first-child').text(content);
+              $cell.find('span.data').text(content);
             } else {
-              $cell.data('row', i);
               $cell.find('input').val(content);
             }
+            //TODO: deshardcodear esta parte!!!!!!
             if (col == 'agreement') {
               $cell.on('click', function (e) {
                 table.action(i, col);
@@ -79,18 +80,15 @@ export default class Table {
       let $td = $(e.target).closest('td');
       table.editClose($td);
       table.editSaveCell($td);
-      let dataSerialized = [];
+      let dataOutput = {};
       for (const key in table.data[$td.data('row')]) {
         let name = key;
         if (table.settings.aliases[key]) {
           name = table.settings.aliases[key];
         }
-        dataSerialized.push({
-          name: name,
-          value: table.data[$td.data('row')][key]
-        });
+        dataOutput[name]= table.data[$td.data('row')][key];
       }
-      table.sh.setExtraData(dataSerialized);
+      table.sh.setExtraData(dataOutput);
     });
   }
   getData(url) {

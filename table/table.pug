@@ -31,7 +31,7 @@ mixin table(spec)
               else
                 td(class=[i,{'editable':row.editable}])
                   if !row.editable
-                    span {{#{i}}}
+                    span.data {{#{i}}}
                   else
                     form.form-inline(action="#")
                       +form-field({

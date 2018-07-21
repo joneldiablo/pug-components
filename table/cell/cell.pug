@@ -1,0 +1,6 @@
+mixin cell(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+
+  .cell(class=spec.__class)&attributes(attributes)
+    p This is an example paragraph for the cell module
