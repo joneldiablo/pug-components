@@ -42,7 +42,10 @@ mixin form-field(spec)
         if typeof spec.label !== 'object'
           .custom-control.custom-checkbox
             input.custom-control-input(id=spec.name name=spec.name type='checkbox')&attributes(spec.inputAttrs)
-            label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= spec.label
+            if spec.label
+              label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= spec.label
+            else
+              label.custom-control-label(for=spec.name) &nbsp;
         else
           each label,i in spec.label
             .custom-control.custom-checkbox
