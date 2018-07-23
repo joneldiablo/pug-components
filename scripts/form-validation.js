@@ -8,6 +8,7 @@ import ServiceHandler from './service-handler';
 export default class FormValidation extends ServiceHandler {
   constructor($, queryElement, settings) {
     settings = $.extend({
+      submit: true,
       urls: {},
       rules: {},
       messages: {}
@@ -17,7 +18,9 @@ export default class FormValidation extends ServiceHandler {
     let vf = this;
     vf.settings = settings;
     vf.$domElement = $(queryElement);
-    vf.validation(settings);
+    if (settings.submit) {
+      vf.validation(settings);
+    }
   }
   checkRule(regex, value) {
     let check = !!value && regex.test(value);
