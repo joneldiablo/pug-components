@@ -42,10 +42,10 @@ export default class ServiceHandler {
       sh[sh.settings.todo](sh.url(sh.settings.todoUrl), data);
     }
   }
-  ajax(url, data, headers) {
+  ajax(url, data, headers, extraConf) {
     let sh = this;
     let $ = this.$;
-    let request = $.ajax({
+    let conf = $.extend({
       url: url,
       headers: headers,
       data: data,
@@ -58,7 +58,8 @@ export default class ServiceHandler {
       complete: () => {
         sh.loadingStop();
       }
-    });
+    }, extraConf);
+    let request = $.ajax(conf);
     return request;
   }
   modal(status, title, body, jsonResp) {

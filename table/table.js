@@ -5,13 +5,11 @@ import ServiceHandler from '../scripts/service-handler';
 export default class Table {
   constructor($, queryElement, settings) {
     this.settings = $.extend({
-      useServices: true,
       submit: true,
       actionClick: (table) => {
 
       },
-      data: {},
-      urls: {}
+      data: {}
     }, settings);
     this.name = 'table';
     this.$ = $;
@@ -21,9 +19,6 @@ export default class Table {
     table.data = settings.data;
     if (Array.isArray(table.data)) {
       table.fillTable();
-    }
-    if (table.settings.useServices) {
-      table.services();
     }
   }
   fillTable(data) {
@@ -61,9 +56,14 @@ export default class Table {
     }
     table.$element.on('click', '.form-field, button[type=button]', function (e) {
       let $td = $(e.target).closest('td');
+      table.$focus = $td;
       table.edit($td);
     });
-
+   /*  table.$element.on('blur', 'td', function (e) {
+      let $td = table.$focus;
+      table.editClose($td);
+      table.editCancel($td);
+    }); */
     table.$element.on('keyup', 'input', function (e) {
       let $td = $(e.target).closest('td');
       if (e.keyCode == 27) {
@@ -72,39 +72,25 @@ export default class Table {
       }
     });
   }
-  services() {
-    let $ = this.$;
-    let table = this;
-    table.sh = new ServiceHandler($, table.queryElement, table.settings);
-    table.$element.on('submit', 'form', function (e) {
-      let $td = $(e.target).closest('td');
-      table.editClose($td);
-      table.editSaveCell($td);
-      let dataOutput = {};
-      for (const key in table.data[$td.data('row')]) {
-        let name = key;
-        if (table.settings.aliases[key]) {
-          name = table.settings.aliases[key];
-        }
-        dataOutput[name]= table.data[$td.data('row')][key];
-      }
-      table.sh.setExtraData(dataOutput);
-    });
-  }
-  getData(url) {
+  getData() {
     let $ = this.$;
 
-    $.ajax({
-
-    });
   }
   setData(url, data) {
     let $ = this.$;
 
   }
   getDataByRow(id) {
-    let $ = this.$;
-
+    let table = this;
+    let dataOutput = {};
+    for (const key in table.data[id]) {
+      let name = key;
+      if (table.settings.aliases[key]) {
+        name = table.settings.aliases[key];
+      }
+      dataOutput[name] = table.data[id][key];
+    }
+    return dataOutput;
   }
   edit($cell) {
     let $ = this.$;

@@ -36,7 +36,7 @@ export default class FormValidation extends ServiceHandler {
       errorClass: 'is-invalid',
       validClass: 'is-valid active',
       errorPlacement: (error, element) => {
-        element.closest('.form-group').append(error.addClass('text-danger pl-3'));
+        element.closest('.form-group').append(error.addClass('text-danger pl-3 pt-2'));
       },
       highlight: (element, errorClass, validClass) => {
         let igi = $(element).closest('.input-group-icon');

@@ -17,11 +17,13 @@
             text-align: center;
             white-space: nowrap;
             .icon {
-                font-size: 15px;
                 .path2:before {
                     margin-left: -2em;
                 }
             }
+        }
+        .icon {
+            font-size: 15px;
         }
         .principal-edit {
             font-size: 25px;
@@ -29,12 +31,12 @@
         }
     }
     tbody {
-        tr {
-            cursor: pointer;
-        }
         th,
         td {
             padding-bottom: 25px;
+            &.agreement {
+                cursor: pointer;
+            }
         }
     }
 }
