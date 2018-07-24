@@ -22,18 +22,19 @@ mixin modal-general(spec)
     }
 
   .modal-general.modal.fade&attributes(attrs)&attributes(attributes)
-    .modal-dialog.mw-100.w-50(role="document")
+    .modal-dialog(role="document")
       .modal-content
-        .modal-header
+        if spec.close
+          div(style="height: 25px;")
+            button.close.text-primary.px-2.pt-2(data-dismiss="modal" type="button" aria-label="Close")
+              +icons({icon:"principal-cross"})
+        .modal-header.pt-0
           h4.font-weight-bold.h4.text-primary.modal-title&attributes(spec.headerAttrs)
             +icons({icon:spec.icon})
             if spec.label
               != spec.label
             else
               span
-          if spec.close
-            button.close.text-primary(data-dismiss="modal", type="button", aria-label="Close")
-              +icons({icon:"principal-cross"})
         .modal-body.px-5
           .px-2
             block
