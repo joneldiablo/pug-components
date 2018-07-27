@@ -28,7 +28,7 @@ mixin modal-general(spec)
           div(style="height: 25px;")
             button.close.text-primary.px-2.pt-2(data-dismiss="modal" type="button" aria-label="Close")
               +icons({icon:"principal-cross"})
-        .modal-header.pt-0
+        .modal-header(class={"pt-0":spec.close})
           h4.font-weight-bold.h4.text-primary.modal-title&attributes(spec.headerAttrs)
             +icons({icon:spec.icon})
             if spec.label
