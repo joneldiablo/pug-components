@@ -5,6 +5,7 @@
         border-bottom: $input-border-width*2 solid $input-border-color;
         .icon {
             opacity: .3;
+            font-size: 24px;
         }
         &:focus-within {
             border-bottom: $input-border-width*2 solid $primary;

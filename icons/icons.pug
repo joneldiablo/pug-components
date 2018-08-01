@@ -26,8 +26,8 @@ mixin icons(spec)
         when "circle-white"
           span.rounded-circle.bg-white.border.border-dark  
         when "principal-phone-number"
-          img(src=baseUrl + "assets/images/cellphone.svg", alt="")
+          img(src= baseUrl + "assets/images/cellphone.svg", alt="")
         default
           |  
   else
-    img.img-fluid.mx-auto.d-block(src=baseUrl + "assets/images/icons/" + spec.icon + ".svg", alt=spec.alt)
+    img.img-fluid.mx-auto.d-block(src= baseUrl + "assets/images/icons/" + spec.icon + ".svg", alt=spec.alt)
