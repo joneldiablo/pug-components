@@ -39,6 +39,6 @@ mixin panel-demo(spec)
             ul.list-unstyled
               each file in output
                 li
-                  a(href=baseUrl + file.path, title=file.name)
+                  a(href= baseUrl + file.path, title=file.name)
                     u= file.name
         block
