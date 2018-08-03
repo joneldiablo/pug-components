@@ -62,4 +62,4 @@ mixin form-field(spec)
               input.custom-control-input(type='radio', id=spec.name name=spec.name)&attributes(spec.inputAttrs[i])
               label.custom-control-label(for=spec.name)&attributes(spec.labelAttrs)!= label
       default
-        input.form-control(id=spec.name name=spec.name type=spec.type)&attributes(spec.inputAttrs)
+        input.form-control(id=spec.name, name=spec.name, type=spec.type, maxlength=80 )&attributes(spec.inputAttrs)
