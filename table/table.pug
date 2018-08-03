@@ -9,7 +9,7 @@ mixin table(spec)
 
   h2.h4.font-weight-bold&attributes(spec.labelAttrs)= spec.label
   .table-responsive
-    table.table.table-hover(class=spec.__class)&attributes(attributes)
+    table.table-component.table.table-hover(class=spec.__class)&attributes(attributes)
       colgroup
         each column in spec.headers
           col(width=column.col)
