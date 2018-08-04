@@ -53,10 +53,10 @@ export default class ServiceHandler {
       dataType: 'json',
       crossDomain: true,
       beforeSend: () => {
-        sh.loading();
+        sh.$domElement.addClass("loading-form");
       },
       complete: () => {
-        sh.loadingStop();
+        sh.$domElement.removeClass("loading-form");
       }
     }, extraConf);
     let request = $.ajax(conf);
