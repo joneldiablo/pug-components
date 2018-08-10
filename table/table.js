@@ -42,7 +42,7 @@ export default class Table {
               $cell.find('input').val(content);
             }
             //TODO: deshardcodear esta parte!!!!!!
-            if (col == 'agreement') {
+            if (col == 'agreement' || col == 'nss') {
               $cell.on('click', function (e) {
                 table.action(i, col);
               });
