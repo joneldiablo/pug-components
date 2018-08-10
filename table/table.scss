@@ -35,7 +35,7 @@
         th,
         td {
             padding-bottom: 25px;
-            &.agreement {
+            &.agreement, &.nss {
                 cursor: pointer;
             }
         }
