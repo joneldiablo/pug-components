@@ -61,6 +61,12 @@ export default class FormValidation extends ServiceHandler {
     };
   }
   validationShowErrors(messages) {
+    let $ = this.$;
+    $.each(messages, (i, x) => {
+      if (typeof x === 'string') {
+        messages[i] = $.sanitize(x);
+      }
+    });
     this.valid.showErrors(messages);
   }
 }
