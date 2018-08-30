@@ -53,10 +53,10 @@ export default class ServiceHandler {
       dataType: 'json',
       crossDomain: true,
       beforeSend: () => {
-        sh.$domElement.addClass("loading-form");
+        sh.loading();
       },
       complete: () => {
-        sh.$domElement.removeClass("loading-form");
+        sh.loadingStop();
       }
     }, extraConf);
     let request = $.ajax(conf);
@@ -113,10 +113,26 @@ export default class ServiceHandler {
     }
   }
   loading(queryElement) {
-    this.$(queryElement || this.$domElement).loading();
+    let $ = this.$;
+    let $element;
+    if (queryElement) {
+      $element = $(queryElement);
+    } else {
+      $element = this.$domElement;
+    }
+    $element.addClass("loading-form");
+    //this.$(queryElement || this.$domElement).loading();
   }
   loadingStop(queryElement) {
-    this.$(queryElement || this.$domElement).loading('stop');
+    let $ = this.$;
+    let $element;
+    if (queryElement) {
+      $element = $(queryElement);
+    } else {
+      $element = this.$domElement;
+    }
+    $element.removeClass("loading-form");
+    //this.$(queryElement || this.$domElement).loading('stop');
   }
   getExtraData() {
     return this.extraData;
