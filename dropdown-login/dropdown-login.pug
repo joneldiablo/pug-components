@@ -6,14 +6,12 @@ mixin dropdown-login(spec)
   - spec.__class = spec.__class || ""
   - spec.copy = spec.copy || {}
   - spec.error = spec.error || false
-  - spec.formFields = spec.formFields || formFields
-  - spec.services = spec.services || services
   -
-    var formFields = {
+    spec.formFields = Object.assign({}, spec.formFields, {
       select:{
         label: "",
         type: "select",
-        name: spec.formFields.select,
+        name: "selectType",
         inputAttrs: {
           size: 1
         },
@@ -37,7 +35,7 @@ mixin dropdown-login(spec)
         }
       },
       inputUser: {
-        name: spec.formFields.user,
+        name: "username",
         icon: "principal-user",
         prepend: true,
         input: {
@@ -47,7 +45,7 @@ mixin dropdown-login(spec)
         }
       },
       inputPass: {
-        name: spec.formFields.password,
+        name: "password",
         icon: "principal-key",
         prepend: true,
         input: {
@@ -56,7 +54,15 @@ mixin dropdown-login(spec)
           required: true
         }
       }
-    }
+    });
+  -
+    spec.services = Object.assign({}, spec.services, {
+      signin: "/signin",
+      getPass: "/getPass",
+      getUsr: "/getUsr",
+      signup: "/signup"
+    });
+  -
     var inputAttrs = {
       class: {
         "mb-3": true,
@@ -67,16 +73,16 @@ mixin dropdown-login(spec)
   a#navbarDropdown.nav-link.dropdown-toggle(data-toggle="dropdown", href="#", role="button", aria-expanded="false", aria-haspopup="true", copy-text="access")= spec.copy["id-access"]
     span(class="fa fa-angle-down") &nbsp;
   #dropdownLogin.dropdown-login.dropdown(class=spec.__class)&attributes(attributes)
-    .dropdown-menu.dropdown-menu-right.py-0.border-0(aria-labelledby="navbarDropdown" aria-autoclose="false")
+    .dropdown-menu.dropdown-menu-right.py-0.border-0(aria-autoclose="false" aria-labelledby="navbarDropdown")
       .px-5.py-3.bg-light
         form(method="post" action=spec.services.signin)
-          +form-field(formFields.select)
+          +form-field(spec.formFields.select)
           .form-group
             label.d-none(for="user", copy-text="usr")= spec.copy["id-usr"]
-            +input-group-icon(formFields.inputUser)(class=inputAttrs.class)
+            +input-group-icon(spec.formFields.inputUser)(class=inputAttrs.class)
           .form-group
             label.d-none(for="password", copy-text="pass")= spec.copy["id-pass"]
-            +input-group-icon(formFields.inputPass)(class=inputAttrs.class)
+            +input-group-icon(spec.formFields.inputPass)(class=inputAttrs.class)
           span.text-danger(class={'d-none':!spec.error}, copy-text="invalid")= spec.copy["id-invalid"]
           //- .form-check
           //-   input#dropdownCheck.form-check-input(type="checkbox")
