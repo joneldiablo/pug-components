@@ -1,0 +1,28 @@
+mixin title(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.__class = spec.__class || ""
+  - spec.h = spec.h || 1
+  -
+    attrs = {
+      class: ['title text-center', spec.__class]
+    }
+  case spec.h
+    when 2
+      h2&attributes(attributes)&attributes(attrs)
+        block
+    when 3
+      h3&attributes(attributes)&attributes(attrs)
+        block
+    when 4
+      h4&attributes(attributes)&attributes(attrs)
+        block
+    when 5
+      h5&attributes(attributes)&attributes(attrs)
+        block
+    when 6
+      h6&attributes(attributes)&attributes(attrs)
+        block
+    default
+      h1&attributes(attributes)&attributes(attrs)
+        block

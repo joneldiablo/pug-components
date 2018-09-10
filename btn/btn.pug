@@ -1,0 +1,22 @@
+mixin btn(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.tag = spec.tag || "a"
+  - spec.color = spec.color || "primary"
+  - spec.href = spec.href || "#"
+  - spec.type = spec.type || "button"
+  -
+    attrs = {
+      class: ["btn", spec.__class, "btn-" + spec.color],
+    }
+
+  case spec.tag
+    when "button"
+      - attrs.type = spec.type
+      button&attributes(attributes)&attributes(attrs)
+        block
+    default
+      - attrs.href = spec.href
+      a&attributes(attributes)&attributes(attrs)
+        block
+  

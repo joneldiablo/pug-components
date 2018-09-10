@@ -1,0 +1,33 @@
+include ../title/title
+include ../btn/btn
+
+mixin hero(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  - spec.image = spec.image || ""
+  - spec.logo = spec.logo || {}
+  - spec.logo.src = spec.logo.src || ""
+  - spec.title = spec.title || {}
+  - spec.title.label = spec.title.label || "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+  - spec.title.attrs = spec.title.attrs || {}
+  - spec.subtitle = spec.subtitle || {}
+  - spec.subtitle.label = spec.subtitle.label || "Nulla ullamcorper sollicitudin orci"
+  - spec.subtitle.attrs = spec.subtitle.attrs || {}
+  - spec.btn = spec.btn || {}
+  - spec.btn.label = spec.btn.label || "Continuar"
+  - spec.btn.href = spec.btn.href || "#"
+  - spec.btn.attrs = spec.btn.attrs || {}
+
+  .hero(class=spec.__class, style="background-image:url("+spec.image+")")&attributes(attributes)
+    .wrapper-hero
+      .inner-hero
+        if block
+          block
+        else
+          img.logo(src=spec.logo.src, alt="")
+          +title(spec.title)
+            != spec.title.label
+          p.text-center&attributes(spec.subtitle)= spec.subtitle.label
+          p.wrapper-btn.text-center
+            +btn(spec.btn)
+              != spec.btn.label
