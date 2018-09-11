@@ -1,0 +1,27 @@
+include ../title/title
+
+mixin property-descriptor(spec)
+  - spec = spec || {}
+  - spec.__class = spec.__class || ""
+  -
+    image = Object.assign({
+      src: "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      alt: "",
+      srcset: ""
+    }, spec.image);
+    title = Object.assign({
+      label: "Lorem ipsum dolor sit amet",
+      h: 4
+    }, spec.title);
+    description = Object.assign({
+      content: " Aenean tincidunt est quis congue ornare. Morbi venenatis scelerisque purus, eget dictum mi dictum non."
+    }, spec.description);
+
+  .property-descriptor.text-center(class=spec.__class)&attributes(attributes)
+    figure
+      img.img-fluid.mx-auto.d-block(src=image.src, alt=image.alt, srcset=image.srcset)
+      figcaption 
+        +title(title)(title.attrs)
+          != title.label
+        p&attributes(description.attrs)
+          != description.content
