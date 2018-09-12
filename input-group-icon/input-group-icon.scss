@@ -27,6 +27,8 @@
             .icon {
                 color: $danger;
                 opacity: 1;
+            }
+            :not(button)>.icon {
                 &:before {
                     content: $principal-cross !important;
                 }
