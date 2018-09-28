@@ -30,7 +30,7 @@ mixin modal-general(spec)
               +icons({icon:"principal-cross"})
         .modal-header(class={"pt-0":spec.close})
           h4.font-weight-bold.h4.text-primary.modal-title&attributes(spec.headerAttrs)
-            +icons({icon:spec.icon})
+            +icons({icon:spec.icon})(class="align-text-bottom")
             if spec.label
               != spec.label
             else
