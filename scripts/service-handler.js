@@ -52,6 +52,7 @@ export default class ServiceHandler {
       method: 'POST',
       dataType: 'json',
       crossDomain: true,
+      cache: false,
       beforeSend: () => {
         sh.loading();
       },
